@@ -49,7 +49,7 @@ export function Income() {
   const [incomelist, setIncomelist] =useState([]);
 
 const getincome=()=>{
-  fetch(`${API}/income`)
+  fetch(`${API}`)
       .then((data) => data.json())
       .then((list) => setIncomelist(list));
 }
