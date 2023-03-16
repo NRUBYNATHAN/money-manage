@@ -46,7 +46,7 @@ export function Addincome() {
       <TextField  error={touched.description && errors.description} name="description" onChange={handleChange} helperText={touched.description && errors.description ? errors.description:null} value={values.description} label="description" variant="outlined" />
       <TextField  error={touched.categories && errors.categories} name="categories" onChange={handleChange} helperText={touched.categories && errors.categories ? errors.categories:null} value={values.categories} label="categories" variant="outlined" />
       <TextField  error={touched.amount && errors.amount} name="amount" onChange={handleChange} helperText={touched.amount && errors.amount ? errors.amount:null} value={values.amount} label="amount" variant="outlined" />
-      <Button type='submit' variant='contained'>submit</Button>
+      <Button onClick={()=>alert('Click the Buton!')}  type='submit' variant='contained'>submit</Button>
       </div>
     </form>
   );
