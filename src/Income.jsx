@@ -94,7 +94,7 @@ const getincome=()=>{
               <StyledTableCell align="center">{income.description}</StyledTableCell>
               <StyledTableCell align="center">{income.categories}</StyledTableCell>
               <StyledTableCell align="center">{income.amount}</StyledTableCell>
-              <IconButton  color="primary" onClick={()=>navigate(`/${income._id}`)}><EditIcon/></IconButton> <IconButton color="error"  onClick={()=>deleteMovie(income._id)}> <DeleteIcon /></IconButton>
+              <IconButton  color="primary" onClick={()=>navigate(`/editincome/${income._id}`)}><EditIcon/></IconButton> <IconButton color="error"  onClick={()=>deleteMovie(income._id)}> <DeleteIcon /></IconButton>
             </StyledTableRow>
          ))}
         </TableBody>

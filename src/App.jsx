@@ -32,7 +32,7 @@ export default function App(){
                       <Route  path="/incomelist"        element={<Income/>}/>
                       <Route  path="/expenselist"           element={<Expense />} />
                       <Route  path="/addincome"           element={<Addincome />} />
-                      <Route  path="/:id"           element={<Editincome />} />
+                      <Route  path="/editincome/:id"           element={<Editincome />} />
                       <Route  path="/addexpense"           element={<Addexpense />} />
                       <Route  path="/editexpense/:id"           element={<Editexpense />} />
                   </Routes>
