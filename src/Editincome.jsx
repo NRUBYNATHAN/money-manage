@@ -12,7 +12,7 @@ import { useEffect, useState } from 'react';
 export function Editincome() {
   
   const { id } = useParams();
-  //const data = obj[id];
+  
   const [list, setList] = useState(null);
   useEffect(() => {
     fetch(`${API}/${id}`)
