@@ -15,7 +15,7 @@ export function Editincome() {
   
   const [list, setList] = useState(null);
   useEffect(() => {
-    fetch(`${API}/${id}`)
+    fetch(`${API}/editincome/${id}`)
       .then((data) => data.json())
       .then((mvs) => setList(mvs));
   }, [id]);
