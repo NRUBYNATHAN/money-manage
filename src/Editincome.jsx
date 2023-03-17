@@ -12,14 +12,17 @@ import { useEffect, useState } from 'react';
 export function Editincome() {
   
   const { id } = useParams();
-  
+  console.log(id)
   const [list, setList] = useState(null);
   useEffect(() => {
-    fetch(`${API}/${id}`)
+     fetch(`${API}/${id}`)
+    
       .then((data) => data.json())
+        
       .then((mvs) => setList(mvs));
   }, [id]);
-  console.log(list);
+//  setList(id)
+ console.log(list)
   return(
   
       list ? <EditincomeForm list={list}/> : <h1>loadiing...</h1>

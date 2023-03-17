@@ -30,7 +30,7 @@ export function Addincome() {
   
   })
   const addincome=async(values)=>{
-   fetch(`${API}/addincome`,{
+   await fetch(`${API}/addincome`,{
     method:"POST",
     body:JSON.stringify(values),
     headers:{"Content-Type": "application/json",},

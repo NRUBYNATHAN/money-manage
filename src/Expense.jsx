@@ -1,6 +1,5 @@
 
 
-
 import * as React from 'react';
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
@@ -17,7 +16,7 @@ import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
-import {API1} from "./global"
+import {API1} from "./global";
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.black,
@@ -37,33 +36,39 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     border: 0,
   },
 }));
-
+// const expense = {
+//       id: 1,
+//       date: "21/02/2023",
+//       description: 'fuel',
+//       categories: 'office',
+//       amount: 1000
+//     };
 
 
 export function Expense() {
   const [expenselist, setExpenselist] =useState([]);
 
-  const getexpense=()=>{
-    fetch(`${API1}`)
-        .then((data) => data.json())
-        .then((list) => setExpenselist(list));
-  }
+const getexpense=()=>{
+  fetch(`${API1}`)
+      .then((data) => data.json())
+      .then((list) => setExpenselist(list));
+}
+
+  useEffect(() => getexpense(), []);
+  const deleteMovie = async(id)=>{
+   
+   await fetch(`${API1}/${id}`,{
+       method:"DELETE",
+     });
+     getexpense();
+   }
+  const navigate=useNavigate();
   
-    useEffect(() => getexpense(), []);
-    const deleteMovie = async(id)=>{
-     
-     await fetch(`${API1}/${id}`,{
-         method:"DELETE",
-       });
-       getexpense();
-     }
-    const navigate=useNavigate();
-    
   return (
     <div>
-       <div className='add'>
+      <div className='add'>
       <h2>Expense Mangement</h2>
-      <Button variant='contained' onClick={()=>navigate("/addexpense")}>Add expense</Button>
+      <Button className='btn' variant="contained" onClick={()=>navigate("/addexpense")}>Add Expense</Button>
       </div>
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 700 }} aria-label="customized table">
@@ -89,7 +94,7 @@ export function Expense() {
               <StyledTableCell align="center">{expense.description}</StyledTableCell>
               <StyledTableCell align="center">{expense.categories}</StyledTableCell>
               <StyledTableCell align="center">{expense.amount}</StyledTableCell>
-              <IconButton color="primary"  onClick={()=>navigate(`/editexpense/${expense._id}`)}><EditIcon/></IconButton> <IconButton color="error" onClick={()=>deleteMovie(expense._id)}><DeleteIcon/></IconButton>
+              <IconButton  color="primary" onClick={()=>navigate(`/editexpense/${expense._id}`)}><EditIcon/></IconButton> <IconButton color="error"  onClick={()=>deleteMovie(expense._id)}> <DeleteIcon /></IconButton>
             </StyledTableRow>
          ))}
         </TableBody>

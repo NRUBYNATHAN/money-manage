@@ -1,6 +1,6 @@
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
-import {API1} from "./global"
+import {API1} from "./global";
 // import { useState } from "react";
 import { useNavigate, useParams } from 'react-router-dom';
 
@@ -12,14 +12,17 @@ import { useEffect, useState } from 'react';
 export function Editexpense() {
   
   const { id } = useParams();
-  //const data = obj[id];
+  console.log(id)
   const [list, setList] = useState(null);
   useEffect(() => {
-    fetch(`${API1}/${id}`)
+     fetch(`${API1}/${id}`)
+    
       .then((data) => data.json())
+        
       .then((mvs) => setList(mvs));
   }, [id]);
-  console.log(list);
+//  setList(id)
+ console.log(list)
   return(
   
       list ? <EditexpenseForm list={list}/> : <h1>loadiing...</h1>
@@ -47,16 +50,16 @@ function EditexpenseForm({list}){
 
     onSubmit:(lists)=>{
     console.log("form value",lists);
-    updateexpense(lists);
+    ubdateexpense(lists);
     }
   });
   
 
   const navigate=useNavigate();
-  const updateexpense=async (lists)=>{
+  const ubdateexpense=async (lists)=>{
     
     
-      fetch(`${API1}/editexpense/${list._id}`,{
+      fetch(`${API1}/${list._id}`,{
         method:"PUT",
         body:JSON.stringify(lists),
         headers:{"Content-Type": "application/json",},
@@ -68,7 +71,7 @@ function EditexpenseForm({list}){
   return (
     <form onSubmit={handleSubmit}>
       <div className='addincome'>
-        <h2>Edit Expenses</h2>
+        <h2>Edit Income</h2>
       <TextField  error={touched.date && errors.date} onBlur={handleBlur} name="date" onChange={handleChange} helperText={touched.date && errors.date ? errors.date:null} value={values.date} label="date" variant="outlined" />
       <TextField  error={touched.description && errors.description} name="description" onChange={handleChange} helperText={touched.description && errors.description ? errors.description:null} value={values.description} label="description" variant="outlined" />
       <TextField  error={touched.categories && errors.categories} name="categories" onChange={handleChange} helperText={touched.categories && errors.categories ? errors.categories:null} value={values.categories} label="categories" variant="outlined" />
