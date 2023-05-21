@@ -1,30 +1,88 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Chart from "react-apexcharts";
 import { Carousel } from "./Carousel";
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import axios from "axios";
 export function Home() {
-  const [state,setState]=useState({
-    options: {
+
+  // const [state,setState]=useState({
+  //   options: {
+  //     chart: {
+  //       id: "basic-bar"
+  //     },
+  //     xaxis: {
+  //       categories: [2018, 2019, 2020, 2021, 2022, 2023]
+  //     }
+  //   },
+  //   series: [
+  //     {
+  //       name: "income",
+  //       data: [300, 500, 450, 500, 490, 600]
+  //     },
+  //     {
+  //       name: "expense",
+  //       data: [200, 350, 465, 400, 239, 400]
+  //     }
+  //   ]
+  // })
+
+
+  const [options,setObject]=useState({
+   
       chart: {
-        id: "basic-bar"
+        id: "apexchart-example"
       },
       xaxis: {
-        categories: [2018, 2019, 2020, 2021, 2022, 2023]
+        categories: []
       }
-    },
-    series: [
-      {
-        name: "income",
-        data: [300, 500, 450, 500, 490, 600]
-      },
-      {
-        name: "expense",
-        data: [200, 350, 465, 400, 239, 400]
-      }
-    ]
+    
   })
+    const [series,setSeries] = useState([{
+      
+        name: "income",
+        data: []
+      } ] )
+
+      useEffect(() => {
+        const date=[];
+        const amount=[];
+      axios.get(
+            "https://money-manage-back.vercel.app/income"
+          ).then(response =>{
+            console.log(response)
+            response.data.map(item=>{
+              console.log("item",item)
+                date.push(item.date);
+                amount.push(item.amount)
+            })
+            setObject({
+   
+              chart: {
+                id: "basic-bar"
+              },
+              xaxis: {
+                categories: date
+              }
+            
+          })
+          setSeries([{
+      
+            name: "income",
+            data: amount
+          } ] )
+            console.log("date",date,amount)
+          }).catch(e=>{
+            alert(e)
+          })
+        
+      },[]);
+
+
+
+
+
   const [pie,setPie]=useState( {
     options: {},
     series: [44, 55, 41, 17, 15],
@@ -84,16 +142,32 @@ export function Home() {
       </div>
      
     </div>
+
+
+
+
+
+
     <div className="chart">
       <h2>Total Incomes & Expense</h2>
+<div>
       <Chart
-              options={state.options}
-              series={state.series}
+              options={options}
+              series={series}
               type="area"
-              width="1500"
-              height="600"
+              width={1000}
+              height={500}
             />
+     </div>
       </div>
+
+
+
+
+
+
+
+
       <div className="pie">
       <div>
         <h2>Income By Catagory</h2>
