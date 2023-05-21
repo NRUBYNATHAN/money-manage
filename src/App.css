@@ -80,6 +80,10 @@ left: 80px;
 margin-top: 10px;
 border: 2px solid rgb(86, 82, 82);
 border-radius: 20px;
+display: flex;
+justify-content: center;
+align-items: center;
+flex-wrap: wrap;
 }
 .pie{
   display: flex;
